@@ -57,7 +57,7 @@ const Sheet = () => {
                         }}
                     >
                         <div
-                            className="mx-2 sm:mx-4 md:mx-6 lg:mx-10 w-auto dark:bg-zinc-900 bg-white rounded-t-2xl shadow-2xl border-t border-zinc-200 dark:border-zinc-800 md:h-[80vh] flex flex-col"
+                            className="mx-2 sm:mx-4 md:mx-6 lg:mx-10 w-auto dark:bg-zinc-900 bg-white rounded-t-2xl shadow-2xl border-t border-zinc-200 dark:border-zinc-800 h-[80vh] flex flex-col"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <div className="relative px-6 pt-4 pb-3 flex-none">
