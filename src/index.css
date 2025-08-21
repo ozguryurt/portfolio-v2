@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tema değişikliği animasyonları */
+* {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease, 
+              box-shadow 0.3s ease;
+}
+
+body {
+  font-family: "Syne", sans-serif !important;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-60px); }
+}
+
+.skillbox {
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skillbox div:nth-child(1) {
+  transition: all 0.3s ease;
+}
+
+.skillbox div:nth-child(2) {
+  transition: all 0.3s ease;
+  opacity: 0;
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.skillbox:hover div:nth-child(1) {
+  transform: translateY(-1rem);
+}
+
+.skillbox:hover div:nth-child(2) {
+  opacity: 1;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

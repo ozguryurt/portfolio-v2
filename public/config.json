@@ -1,0 +1,272 @@
+{
+    "anasayfa": {
+      "baslik1": "Merhaba, ben Özgür",
+      "baslik2": "Bilgisayar Mühendisi",
+      "resim": "/images/avatar.png",
+      "yazi": "Yazılım geliştirme alanında kendi izimi çizmeye kararlıyım. Kodların sihirli dünyasına olan tutkumla, her bir proje için yenilikçi ve estetik odaklı çözümler sunmaya odaklanıyorum. Yazılım dünyasında yaratıcı izler bırakmak için buradayım."
+    },
+    "projeler": [
+      {
+        "ad": "Hosting",
+        "url": "",
+        "resimler": [
+          "/images/projeler/hosting2_1.png",
+          "/images/projeler/hosting2_2.png",
+          "/images/projeler/hosting2_3.png",
+          "/images/projeler/hosting2_4.png",
+          "/images/projeler/hosting2_5.png"
+        ]
+      },
+      {
+        "ad": "Diyetisyen",
+        "url": "https://esrakaralar.com.tr",
+        "resimler": [
+          "/images/projeler/diyetisyen1_1.png",
+          "/images/projeler/diyetisyen1_2.png",
+          "/images/projeler/diyetisyen1_3.png"
+        ]
+      },
+      {
+        "ad": "Restoran",
+        "url": "",
+        "resimler": [
+          "/images/projeler/lily_1.png"
+        ]
+      },
+      {
+        "ad": "TAF",
+        "url": "https://www.taf.org.tr",
+        "resimler": [
+          "/images/projeler/taf_1.png",
+          "/images/projeler/taf_2.png",
+          "/images/projeler/taf_3.png",
+          "/images/projeler/taf_4.png"
+        ]
+      },
+      {
+        "ad": "Turizm",
+        "url": "",
+        "resimler": [
+          "/images/projeler/turizm_1.jpg",
+          "/images/projeler/turizm_2.jpg",
+          "/images/projeler/turizm_3.jpg",
+          "/images/projeler/turizm_4.jpg"
+        ]
+      },
+      {
+        "ad": "Evcil Hayvan Sahiplendirme",
+        "url": "https://evcilhayvansahiplen.com",
+        "resimler": [
+          "/images/projeler/evcilhayvan_1.png",
+          "/images/projeler/evcilhayvan_2.png"
+        ]
+      },
+      {
+        "ad": "Reklam Ajansı",
+        "url": "https://kraft.ozguryurt.dev",
+        "resimler": [
+          "/images/projeler/kraft_1.jpg",
+          "/images/projeler/kraft_2.jpg",
+          "/images/projeler/kraft_3.jpg"
+        ]
+      },
+      {
+        "ad": "Şirket",
+        "url": "",
+        "resimler": [
+          "/images/projeler/sirket2_1.png",
+          "/images/projeler/sirket2_2.png"
+        ]
+      },
+      {
+        "ad": "E-Ticaret",
+        "url": "",
+        "resimler": [
+          "/images/projeler/eticaret3_1.png",
+          "/images/projeler/eticaret3_2.png",
+          "/images/projeler/eticaret3_3.png"
+        ]
+      },
+      {
+        "ad": "E-Ticaret",
+        "url": "",
+        "resimler": [
+          "/images/projeler/eticaret.jpeg"
+        ]
+      },
+      {
+        "ad": "Tıp",
+        "url": "",
+        "resimler": [
+          "/images/projeler/tip.jpeg"
+        ]
+      },
+      {
+        "ad": "Hukuk",
+        "url": "",
+        "resimler": [
+          "/images/projeler/hukuk.jpeg"
+        ]
+      },
+      {
+        "ad": "Şirket",
+        "url": "",
+        "resimler": [
+          "/images/projeler/sirket.jpeg"
+        ]
+      },
+      {
+        "ad": "Tekstil",
+        "url": "",
+        "resimler": [
+          "/images/projeler/tekstil.jpeg"
+        ]
+      },
+      {
+        "ad": "Ticaret",
+        "url": "",
+        "resimler": [
+          "/images/projeler/satis.jpeg"
+        ]
+      },
+      {
+        "ad": "Hosting",
+        "url": "",
+        "resimler": [
+          "/images/projeler/hosting.jpeg"
+        ]
+      },
+      {
+        "ad": "E-Ticaret",
+        "url": "",
+        "resimler": [
+          "/images/projeler/eticaret2.jpeg"
+        ]
+      },
+      {
+        "ad": "Rehber",
+        "url": "",
+        "resimler": [
+          "/images/projeler/rehber1_1.png",
+          "/images/projeler/rehber1_2.png",
+          "/images/projeler/rehber1_3.png"
+        ]
+      },
+      {
+        "ad": "Giyim",
+        "url": "",
+        "resimler": [
+          "/images/projeler/giyim.png"
+        ]
+      },
+      {
+        "ad": "Test",
+        "url": "",
+        "resimler": [
+          "/images/projeler/test.png"
+        ]
+      },
+      {
+        "ad": "E-Ticaret",
+        "url": "",
+        "resimler": [
+          "/images/projeler/eticaret5_1.png",
+          "/images/projeler/eticaret5_2.png",
+          "/images/projeler/eticaret5_3.png"
+        ]
+      }
+    ],
+    "yetenekler": [
+      {
+        "isim": "HTML",
+        "icon": "skill-icons:html"
+      },
+      {
+        "isim": "CSS",
+        "icon": "skill-icons:css"
+      },
+      {
+        "isim": "Javascript",
+        "icon": "skill-icons:javascript"
+      },
+      {
+        "isim": "Typescript",
+        "icon": "skill-icons:typescript"
+      },
+      {
+        "isim": "Flutter",
+        "icon": "devicon:flutter"
+      },
+      {
+        "isim": "Bootstrap",
+        "icon": "skill-icons:bootstrap"
+      },
+      {
+        "isim": "TailwindCSS",
+        "icon": "skill-icons:tailwindcss-dark"
+      },
+      {
+        "isim": "React",
+        "icon": "devicon:react"
+      },
+      {
+        "isim": "NextJS",
+        "icon": "devicon:nextjs"
+      },
+      {
+        "isim": "PHP",
+        "icon": "skill-icons:php-dark"
+      },
+      {
+        "isim": "NodeJS",
+        "icon": "skill-icons:nodejs-dark"
+      },
+      {
+        "isim": "ExpressJS",
+        "icon": "skill-icons:expressjs-dark"
+      },
+      {
+        "isim": "MySQL",
+        "icon": "skill-icons:mysql-dark"
+      },
+      {
+        "isim": "PostgreSQL",
+        "icon": "skill-icons:postgresql-dark"
+      },
+      {
+        "isim": "GraphQL",
+        "icon": "skill-icons:graphql-dark"
+      },
+      {
+        "isim": "C#",
+        "icon": "devicon:csharp"
+      },
+      {
+        "isim": "Python",
+        "icon": "skill-icons:python-dark"
+      }
+    ],
+    "iletisim": {
+      "baslik": "Harika bir şey yapmaya hazır mısınız? Birlikte yenilik yapalım.",
+      "bilgiler": [
+        {
+          "baslik": "Github",
+          "deger": "@ozguryurt",
+          "url": "https://github.com/ozguryurt",
+          "icon": "mdi:github"
+        },
+        {
+          "baslik": "Linkedin",
+          "deger": "@ozguryurt",
+          "url": "https://tr.linkedin.com/in/ozguryurt",
+          "icon": "mdi:linkedin"
+        },
+        {
+          "baslik": "Mail",
+          "deger": "ozgurryurtt@gmail.com",
+          "url": "mailto:ozgurryurtt@gmail.com",
+          "icon": "mdi:mail"
+        }
+      ]
+    }
+  }
