@@ -3,30 +3,28 @@ import ThemeSelector from "../components/ThemeSelector";
 import Navbar from "../components/Navbar";
 import { useEffect } from "react";
 import dataStore from "../stores/dataStore";
-import ScrollToTop from "../components/ScrollToTop";
-import HashScroller from "../components/HashScroller";
 import Sheet from "../components/Sheet";
 
 export default function MainLayout() {
 
-    const { loading, error, setApiData, setLoading, setError } = dataStore()
-  
-    useEffect(() => {
-      const fetchData = async () => {
-        setLoading(true)
-        try {
-          const response = await fetch('/config.json')
-          const data = await response.json()
-          setApiData(data)
-        } catch (err) {
-          setError(err instanceof Error ? err.message : 'Hata oluştu')
-        } finally {
-          setLoading(false)
-        }
+  const { loading, error, setApiData, setLoading, setError } = dataStore()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      try {
+        const response = await fetch('/config.json')
+        const data = await response.json()
+        setApiData(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Hata oluştu')
+      } finally {
+        setLoading(false)
       }
-      
-      fetchData()
-    }, [])
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -41,12 +39,10 @@ export default function MainLayout() {
           </div>
         ) : (
           <>
-            <Navbar/>
-            <ThemeSelector/>
-            <ScrollToTop/>
-            <HashScroller/>
-            <Outlet/>
-            <Sheet/>
+            <Navbar />
+            <ThemeSelector />
+            <Sheet />
+            <Outlet />
           </>
         )
       }
