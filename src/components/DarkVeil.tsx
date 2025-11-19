@@ -69,12 +69,7 @@ void main(){
     float scanline_val=sin(gl_FragCoord.y*uScanFreq)*0.5+0.5;
     col.rgb*=1.-(scanline_val*scanline_val)*uScan;
     col.rgb+=(rand(gl_FragCoord.xy+uTime)-0.5)*uNoise;
-    
-    // Renk parlaklığına göre alpha değeri hesapla (transparan arka plan için)
-    float brightness = dot(col.rgb, vec3(0.299, 0.587, 0.114));
-    float alpha = smoothstep(0.0, 0.3, brightness);
-    
-    gl_FragColor=vec4(clamp(col.rgb,0.0,1.0), alpha);
+    gl_FragColor=vec4(clamp(col.rgb,0.0,1.0),1.0);
 }
 `;
 
@@ -104,16 +99,10 @@ export default function DarkVeil({
 
         const renderer = new Renderer({
             dpr: Math.min(window.devicePixelRatio, 2),
-            canvas,
-            alpha: true
+            canvas
         });
 
         const gl = renderer.gl;
-
-        // Alpha blending'i etkinleştir
-        gl.enable(gl.BLEND);
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
         const geometry = new Triangle(gl);
 
         const program = new Program(gl, {

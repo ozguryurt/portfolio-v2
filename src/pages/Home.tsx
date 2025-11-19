@@ -18,10 +18,10 @@ const Home = () => {
                 >
                     <Plasma
                         color="#B19EEF"
+                        speed={0.6}
                         direction="forward"
-                        speed={0.5}
-                        scale={2}
-                        opacity={0.5}
+                        scale={1.1}
+                        opacity={0.8}
                         mouseInteractive={false}
                     />
 
@@ -32,7 +32,7 @@ const Home = () => {
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                         transition={{ duration: 0.5, delay: 0.25 }}
-                        className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center drop-shadow-lg dark:text-white text-zinc-800"
+                        className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center drop-shadow-lg dark:text-white text-zinc-800 text-shadow-lg"
                     >
                         {apiData?.anasayfa.baslik1}
                     </motion.p>
@@ -40,7 +40,7 @@ const Home = () => {
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="font-medium text-4xl sm:text-5xl lg:text-6xl text-center drop-shadow-lg dark:text-white text-zinc-800"
+                        className="font-medium text-4xl sm:text-5xl lg:text-6xl text-center drop-shadow-lg dark:text-white text-zinc-800 text-shadow-lg"
                     >
                         {apiData?.anasayfa.baslik2}
                     </motion.p>
@@ -48,7 +48,7 @@ const Home = () => {
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                         transition={{ duration: 0.8, delay: 0.75 }}
-                        className="font-normal text-xl text-center mt-12 drop-shadow-md dark:text-white text-zinc-800"
+                        className="font-normal text-xl text-center mt-12 drop-shadow-md dark:text-white text-zinc-800 text-shadow-lg"
                     >
                         {apiData?.anasayfa.yazi}
                     </motion.p>
