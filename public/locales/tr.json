@@ -7,14 +7,13 @@
     },
     "projeler": [
         {
-            "ad": "Hosting",
-            "url": "",
+            "ad": "Dablan Vinç",
+            "url": "https://dablanvinc.com.tr",
             "resimler": [
-                "/images/projeler/hosting2_1.png",
-                "/images/projeler/hosting2_2.png",
-                "/images/projeler/hosting2_3.png",
-                "/images/projeler/hosting2_4.png",
-                "/images/projeler/hosting2_5.png"
+                "/images/projeler/dablan_1.png",
+                "/images/projeler/dablan_2.png",
+                "/images/projeler/dablan_3.png",
+                "/images/projeler/dablan_4.png"
             ]
         },
         {
@@ -27,10 +26,12 @@
             ]
         },
         {
-            "ad": "Restoran",
-            "url": "",
+            "ad": "Ortak",
+            "url": "https://ortak.live",
             "resimler": [
-                "/images/projeler/lily_1.png"
+                "/images/projeler/ortak1.png",
+                "/images/projeler/ortak2.png",
+                "/images/projeler/ortak3.png"
             ]
         },
         {
@@ -44,6 +45,32 @@
             ]
         },
         {
+            "ad": "Sonyaz Turizm",
+            "url": "https://sonyazturizm.com.tr",
+            "resimler": [
+                "/images/projeler/sonyaz1.png",
+                "/images/projeler/sonyaz2.png",
+                "/images/projeler/sonyaz3.png",
+                "/images/projeler/sonyaz4.png"
+            ]
+        },
+        {
+            "ad": "Restoran",
+            "url": "",
+            "resimler": [
+                "/images/projeler/lily_1.png"
+            ]
+        },
+        {
+            "ad": "Yemek Tarifleri Mobil Uygulaması",
+            "url": "",
+            "resimler": [
+                "/images/projeler/recipeapp_mobile1.png",
+                "/images/projeler/recipeapp_mobile2.png",
+                "/images/projeler/recipeapp_mobile3.png"
+            ]
+        },
+        {
             "ad": "Turizm",
             "url": "",
             "resimler": [
@@ -51,6 +78,17 @@
                 "/images/projeler/turizm_2.jpg",
                 "/images/projeler/turizm_3.jpg",
                 "/images/projeler/turizm_4.jpg"
+            ]
+        },
+        {
+            "ad": "Hosting",
+            "url": "",
+            "resimler": [
+                "/images/projeler/hosting2_1.png",
+                "/images/projeler/hosting2_2.png",
+                "/images/projeler/hosting2_3.png",
+                "/images/projeler/hosting2_4.png",
+                "/images/projeler/hosting2_5.png"
             ]
         },
         {
@@ -68,6 +106,14 @@
                 "/images/projeler/kraft_1.jpg",
                 "/images/projeler/kraft_2.jpg",
                 "/images/projeler/kraft_3.jpg"
+            ]
+        },
+        {
+            "ad": "Dosya Yönetim Uygulaması",
+            "url": "https://filemanager.ozguryurt.dev",
+            "resimler": [
+                "/images/projeler/filemanager_1.png",
+                "/images/projeler/filemanager_2.png"
             ]
         },
         {
