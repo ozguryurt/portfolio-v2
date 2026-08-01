@@ -1,10 +1,15 @@
 import ProjectCard from "../components/ProjectCard"
 import dataStore from "../stores/dataStore"
 import { motion } from "framer-motion"
+import languageStore from "../stores/languageStore";
+import { ui, type Lang } from "../utils/translations";
 
 const AllProjects = () => {
 
   const { apiData } = dataStore()
+  const { lang } = languageStore()
+  const currentLang: Lang = lang
+  const t = ui[currentLang]
 
   return (
     <>
@@ -14,10 +19,10 @@ const AllProjects = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          viewport={{ once: true, amount: 0.3 }} /* tekrarlaması için once: false yapılabilir */
+          viewport={{ once: true, amount: 0.3 }}
           className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5"
         >
-          Tüm Projeler
+          {t.projects.allProjects}
         </motion.p>
 
         <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">

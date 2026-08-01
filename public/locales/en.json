@@ -1,0 +1,272 @@
+{
+    "anasayfa": {
+        "baslik1": "Hi, I'm Özgür",
+        "baslik2": "Computer Engineer",
+        "resim": "/images/avatar.png",
+        "yazi": "I am determined to leave my mark in the field of software development. With my passion for the magical world of code, I focus on delivering innovative and aesthetic-oriented solutions for every project. I'm here to make a creative impact in the world of software."
+    },
+    "projeler": [
+        {
+            "ad": "Hosting",
+            "url": "",
+            "resimler": [
+                "/images/projeler/hosting2_1.png",
+                "/images/projeler/hosting2_2.png",
+                "/images/projeler/hosting2_3.png",
+                "/images/projeler/hosting2_4.png",
+                "/images/projeler/hosting2_5.png"
+            ]
+        },
+        {
+            "ad": "Dietitian",
+            "url": "https://esrakaralar.com.tr",
+            "resimler": [
+                "/images/projeler/diyetisyen1_1.png",
+                "/images/projeler/diyetisyen1_2.png",
+                "/images/projeler/diyetisyen1_3.png"
+            ]
+        },
+        {
+            "ad": "Restaurant",
+            "url": "",
+            "resimler": [
+                "/images/projeler/lily_1.png"
+            ]
+        },
+        {
+            "ad": "TAF",
+            "url": "https://www.taf.org.tr",
+            "resimler": [
+                "/images/projeler/taf_1.png",
+                "/images/projeler/taf_2.png",
+                "/images/projeler/taf_3.png",
+                "/images/projeler/taf_4.png"
+            ]
+        },
+        {
+            "ad": "Tourism",
+            "url": "",
+            "resimler": [
+                "/images/projeler/turizm_1.jpg",
+                "/images/projeler/turizm_2.jpg",
+                "/images/projeler/turizm_3.jpg",
+                "/images/projeler/turizm_4.jpg"
+            ]
+        },
+        {
+            "ad": "Pet Adoption",
+            "url": "https://evcilhayvansahiplen.com",
+            "resimler": [
+                "/images/projeler/evcilhayvan_1.png",
+                "/images/projeler/evcilhayvan_2.png"
+            ]
+        },
+        {
+            "ad": "Advertising Agency",
+            "url": "https://kraft.ozguryurt.dev",
+            "resimler": [
+                "/images/projeler/kraft_1.jpg",
+                "/images/projeler/kraft_2.jpg",
+                "/images/projeler/kraft_3.jpg"
+            ]
+        },
+        {
+            "ad": "Company",
+            "url": "",
+            "resimler": [
+                "/images/projeler/sirket2_1.png",
+                "/images/projeler/sirket2_2.png"
+            ]
+        },
+        {
+            "ad": "E-Commerce",
+            "url": "",
+            "resimler": [
+                "/images/projeler/eticaret3_1.png",
+                "/images/projeler/eticaret3_2.png",
+                "/images/projeler/eticaret3_3.png"
+            ]
+        },
+        {
+            "ad": "E-Commerce",
+            "url": "",
+            "resimler": [
+                "/images/projeler/eticaret.jpeg"
+            ]
+        },
+        {
+            "ad": "Medical",
+            "url": "",
+            "resimler": [
+                "/images/projeler/tip.jpeg"
+            ]
+        },
+        {
+            "ad": "Legal",
+            "url": "",
+            "resimler": [
+                "/images/projeler/hukuk.jpeg"
+            ]
+        },
+        {
+            "ad": "Company",
+            "url": "",
+            "resimler": [
+                "/images/projeler/sirket.jpeg"
+            ]
+        },
+        {
+            "ad": "Textile",
+            "url": "",
+            "resimler": [
+                "/images/projeler/tekstil.jpeg"
+            ]
+        },
+        {
+            "ad": "Commerce",
+            "url": "",
+            "resimler": [
+                "/images/projeler/satis.jpeg"
+            ]
+        },
+        {
+            "ad": "Hosting",
+            "url": "",
+            "resimler": [
+                "/images/projeler/hosting.jpeg"
+            ]
+        },
+        {
+            "ad": "E-Commerce",
+            "url": "",
+            "resimler": [
+                "/images/projeler/eticaret2.jpeg"
+            ]
+        },
+        {
+            "ad": "Directory",
+            "url": "",
+            "resimler": [
+                "/images/projeler/rehber1_1.png",
+                "/images/projeler/rehber1_2.png",
+                "/images/projeler/rehber1_3.png"
+            ]
+        },
+        {
+            "ad": "Clothing",
+            "url": "",
+            "resimler": [
+                "/images/projeler/giyim.png"
+            ]
+        },
+        {
+            "ad": "Test",
+            "url": "",
+            "resimler": [
+                "/images/projeler/test.png"
+            ]
+        },
+        {
+            "ad": "E-Commerce",
+            "url": "",
+            "resimler": [
+                "/images/projeler/eticaret5_1.png",
+                "/images/projeler/eticaret5_2.png",
+                "/images/projeler/eticaret5_3.png"
+            ]
+        }
+    ],
+    "yetenekler": [
+        {
+            "isim": "HTML",
+            "icon": "skill-icons:html"
+        },
+        {
+            "isim": "CSS",
+            "icon": "skill-icons:css"
+        },
+        {
+            "isim": "Javascript",
+            "icon": "skill-icons:javascript"
+        },
+        {
+            "isim": "Typescript",
+            "icon": "skill-icons:typescript"
+        },
+        {
+            "isim": "Flutter",
+            "icon": "devicon:flutter"
+        },
+        {
+            "isim": "Bootstrap",
+            "icon": "skill-icons:bootstrap"
+        },
+        {
+            "isim": "TailwindCSS",
+            "icon": "skill-icons:tailwindcss-dark"
+        },
+        {
+            "isim": "React",
+            "icon": "devicon:react"
+        },
+        {
+            "isim": "NextJS",
+            "icon": "devicon:nextjs"
+        },
+        {
+            "isim": "PHP",
+            "icon": "skill-icons:php-dark"
+        },
+        {
+            "isim": "NodeJS",
+            "icon": "skill-icons:nodejs-dark"
+        },
+        {
+            "isim": "ExpressJS",
+            "icon": "skill-icons:expressjs-dark"
+        },
+        {
+            "isim": "MySQL",
+            "icon": "skill-icons:mysql-dark"
+        },
+        {
+            "isim": "PostgreSQL",
+            "icon": "skill-icons:postgresql-dark"
+        },
+        {
+            "isim": "GraphQL",
+            "icon": "skill-icons:graphql-dark"
+        },
+        {
+            "isim": "C#",
+            "icon": "devicon:csharp"
+        },
+        {
+            "isim": "Python",
+            "icon": "skill-icons:python-dark"
+        }
+    ],
+    "iletisim": {
+        "baslik": "Ready to make something great? Let's innovate together.",
+        "bilgiler": [
+            {
+                "baslik": "Github",
+                "deger": "@ozguryurt",
+                "url": "https://github.com/ozguryurt",
+                "icon": "mdi:github"
+            },
+            {
+                "baslik": "Linkedin",
+                "deger": "@ozguryurt",
+                "url": "https://tr.linkedin.com/in/ozguryurt",
+                "icon": "mdi:linkedin"
+            },
+            {
+                "baslik": "Mail",
+                "deger": "ozgurryurtt@gmail.com",
+                "url": "mailto:ozgurryurtt@gmail.com",
+                "icon": "mdi:mail"
+            }
+        ]
+    }
+}

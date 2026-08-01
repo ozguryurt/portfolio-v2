@@ -17,7 +17,7 @@ const Home = () => {
                     className="absolute inset-0"
                 >
                     <Plasma
-                        color="#B19EEF"
+                        color="#ddf1ff"
                         speed={0.6}
                         direction="forward"
                         scale={1.1}

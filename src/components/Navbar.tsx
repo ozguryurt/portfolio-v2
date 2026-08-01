@@ -1,7 +1,13 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router";
+import languageStore from "../stores/languageStore";
+import { ui, routeMap, type Lang } from "../utils/translations";
 
 const Navbar = () => {
+  const { lang } = languageStore()
+  const currentLang: Lang = lang
+  const t = ui[currentLang]
+  const routes = routeMap[currentLang]
 
   return (
     <motion.div
@@ -12,28 +18,28 @@ const Navbar = () => {
     >
       <div className="max-w-xl mx-auto backdrop-blur-sm dark:bg-zinc-800/50 bg-zinc-200/50 shadow-lg rounded-full py-3 lg:px-8 px-3 flex justify-center items-center gap-8">
         <Link
-          to={{ pathname: "/" }}
+          to={`/${currentLang}${routes.home}`}
           className="font-medium text-sm lg:text-lg text-center drop-shadow-lg dark:text-white text-zinc-800 cursor-pointer"
         >
-          Anasayfa
+          {t.navbar.home}
         </Link>
         <Link
-          to={{ pathname: "/yetenekler" }}
+          to={`/${currentLang}${routes.skills}`}
           className="font-medium text-sm lg:text-lg text-center drop-shadow-lg dark:text-white text-zinc-800 cursor-pointer"
         >
-          Yetenekler
+          {t.navbar.skills}
         </Link>
         <Link
-          to={{ pathname: "/projeler" }}
+          to={`/${currentLang}${routes.projects}`}
           className="font-medium text-sm lg:text-lg text-center drop-shadow-lg dark:text-white text-zinc-800 cursor-pointer"
         >
-          Projeler
+          {t.navbar.projects}
         </Link>
         <Link
-          to={{ pathname: "/iletisim" }}
+          to={`/${currentLang}${routes.contact}`}
           className="font-medium text-sm lg:text-lg text-center drop-shadow-lg dark:text-white text-zinc-800 cursor-pointer"
         >
-          İletişim
+          {t.navbar.contact}
         </Link>
       </div>
     </motion.div>

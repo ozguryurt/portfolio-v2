@@ -1,28 +1,33 @@
 import ContactBox from "../components/ContactCard";
 import dataStore from "../stores/dataStore"
 import { motion } from "framer-motion"
+import languageStore from "../stores/languageStore";
+import { ui, type Lang } from "../utils/translations";
 
 const Contact = () => {
   const { apiData } = dataStore()
+  const { lang } = languageStore()
+  const currentLang: Lang = lang
+  const t = ui[currentLang]
 
   return (
     <section id="iletisim" className="min-h-screen flex flex-col items-center justify-center lg:px-56 px-10 relative overflow-hidden dark:bg-zinc-900 bg-white">
-      
+
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.25 }}
-        viewport={{ once: true, amount: 0.3 }} /* tekrarlaması için once: false yapılabilir */
+        viewport={{ once: true, amount: 0.3 }}
         className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5"
       >
-        İletişim
+        {t.contact.title}
       </motion.p>
 
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.25 }}
-        viewport={{ once: true, amount: 0.3 }} /* tekrarlaması için once: false yapılabilir */
+        viewport={{ once: true, amount: 0.3 }}
         className="font-normal text-xl text-center mb-12 drop-shadow-md dark:text-white text-zinc-800"
       >
         {apiData?.iletisim.baslik}
@@ -32,10 +37,10 @@ const Contact = () => {
         {apiData?.iletisim.bilgiler.map((iletisim, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 20}}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: (i + 0.25) * 0.1 }}
-            viewport={{ once: true, amount: 0.2 }} 
+            viewport={{ once: true, amount: 0.2 }}
           >
             <ContactBox url={iletisim.url} baslik={iletisim.baslik} deger={iletisim.deger} icon={iletisim.icon} />
           </motion.div>
