@@ -1,20 +1,24 @@
-import React, { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle } from 'ogl';
+import { useEffect, useRef, useState } from "react"
+import { Mesh, Program, Renderer, Triangle } from "ogl"
 
 interface PlasmaProps {
-    color?: string;
-    speed?: number;
-    direction?: 'forward' | 'reverse' | 'pingpong';
-    scale?: number;
-    opacity?: number;
-    mouseInteractive?: boolean;
+  color?: string
+  speed?: number
+  direction?: "forward" | "reverse" | "pingpong"
+  scale?: number
+  opacity?: number
+  mouseInteractive?: boolean
 }
 
 const hexToRgb = (hex: string): [number, number, number] => {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    if (!result) return [1, 0.5, 0.2];
-    return [parseInt(result[1], 16) / 255, parseInt(result[2], 16) / 255, parseInt(result[3], 16) / 255];
-};
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) return [1, 0.5, 0.2]
+  return [
+    Number.parseInt(result[1], 16) / 255,
+    Number.parseInt(result[2], 16) / 255,
+    Number.parseInt(result[3], 16) / 255,
+  ]
+}
 
 const vertex = `#version 300 es
 precision highp float;
@@ -25,7 +29,7 @@ void main() {
   vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
 }
-`;
+`
 
 const fragment = `#version 300 es
 precision highp float;
@@ -44,25 +48,21 @@ out vec4 fragColor;
 void mainImage(out vec4 o, vec2 C) {
   vec2 center = iResolution.xy * 0.5;
   C = (C - center) / uScale + center;
-  
   vec2 mouseOffset = (uMouse - center) * 0.0002;
   C += mouseOffset * length(C - center) * step(0.5, uMouseInteractive);
-  
+
   float i, d, z, T = iTime * uSpeed * uDirection;
   vec3 O, p, S;
-
   for (vec2 r = iResolution.xy, Q; ++i < 60.; O += o.w/d*o.xyz) {
-    p = z*normalize(vec3(C-.5*r,r.y)); 
-    p.z -= 4.; 
+    p = z*normalize(vec3(C-.5*r,r.y));
+    p.z -= 4.;
     S = p;
     d = p.y-T;
-    
-    p.x += .4*(1.+p.y)*sin(d + p.x*0.1)*cos(.34*d + p.x*0.05); 
-    Q = p.xz *= mat2(cos(p.y+vec4(0,11,33,0)-T)); 
-    z+= d = abs(sqrt(length(Q*Q)) - .25*(5.+S.y))/3.+8e-4; 
+    p.x += .4*(1.+p.y)*sin(d + p.x*0.1)*cos(.34*d + p.x*0.05);
+    Q = p.xz *= mat2(cos(p.y+vec4(0,11,33,0)-T));
+    z+= d = abs(sqrt(length(Q*Q)) - .25*(5.+S.y))/3.+8e-4;
     o = 1.+sin(S.y+p.z*.5+S.z-length(S-p)+vec4(2,1,0,8));
   }
-  
   o.xyz = tanh(O/1e4);
 }
 
@@ -79,130 +79,152 @@ void main() {
   vec4 o = vec4(0.0);
   mainImage(o, gl_FragCoord.xy);
   vec3 rgb = sanitize(o.rgb);
-  
   float intensity = (rgb.r + rgb.g + rgb.b) / 3.0;
   vec3 customColor = intensity * uCustomColor;
   vec3 finalColor = mix(rgb, customColor, step(0.5, uUseCustomColor));
-  
   float alpha = length(rgb) * uOpacity;
   fragColor = vec4(finalColor, alpha);
-}`;
+}`
 
-export const Plasma: React.FC<PlasmaProps> = ({
-    color = '#ffffff',
-    speed = 1,
-    direction = 'forward',
-    scale = 1,
-    opacity = 1,
-    mouseInteractive = true
-}) => {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const mousePos = useRef({ x: 0, y: 0 });
+export default function Plasma({
+  color = "#ffffff",
+  speed = 1,
+  direction = "forward",
+  scale = 1,
+  opacity = 1,
+  mouseInteractive = true,
+}: PlasmaProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const [reduceMotion, setReduceMotion] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  )
 
-    useEffect(() => {
-        if (!containerRef.current) return;
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const updatePreference = () => setReduceMotion(mediaQuery.matches)
+    mediaQuery.addEventListener("change", updatePreference)
+    return () => mediaQuery.removeEventListener("change", updatePreference)
+  }, [])
 
-        const useCustomColor = color ? 1.0 : 0.0;
-        const customColorRgb = color ? hexToRgb(color) : [1, 1, 1];
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container || reduceMotion) return
 
-        const directionMultiplier = direction === 'reverse' ? -1.0 : 1.0;
+    const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8
+    const qualityScale = window.innerWidth < 768 || deviceMemory <= 4 ? 0.55 : 0.75
+    const renderer = new Renderer({
+      webgl: 2,
+      alpha: true,
+      antialias: false,
+      dpr: Math.min(window.devicePixelRatio || 1, 1.5) * qualityScale,
+    })
+    const gl = renderer.gl
+    const canvas = gl.canvas as HTMLCanvasElement
+    canvas.style.display = "block"
+    canvas.style.width = "100%"
+    canvas.style.height = "100%"
+    container.appendChild(canvas)
 
-        const renderer = new Renderer({
-            webgl: 2,
-            alpha: true,
-            antialias: false,
-            dpr: Math.min(window.devicePixelRatio || 1, 2)
-        });
-        const gl = renderer.gl;
-        const canvas = gl.canvas as HTMLCanvasElement;
-        canvas.style.display = 'block';
-        canvas.style.width = '100%';
-        canvas.style.height = '100%';
-        containerRef.current.appendChild(canvas);
+    const program = new Program(gl, {
+      vertex,
+      fragment,
+      uniforms: {
+        iTime: { value: 0 },
+        iResolution: { value: new Float32Array([1, 1]) },
+        uCustomColor: { value: new Float32Array(hexToRgb(color)) },
+        uUseCustomColor: { value: color ? 1 : 0 },
+        uSpeed: { value: speed * 0.4 },
+        uDirection: { value: direction === "reverse" ? -1 : 1 },
+        uScale: { value: scale },
+        uOpacity: { value: opacity },
+        uMouse: { value: new Float32Array([0, 0]) },
+        uMouseInteractive: { value: mouseInteractive ? 1 : 0 },
+      },
+    })
+    const geometry = new Triangle(gl)
+    const mesh = new Mesh(gl, { geometry, program })
 
-        const geometry = new Triangle(gl);
+    const setSize = () => {
+      const rect = container.getBoundingClientRect()
+      renderer.setSize(Math.max(1, rect.width), Math.max(1, rect.height))
+      const resolution = program.uniforms.iResolution.value as Float32Array
+      resolution[0] = gl.drawingBufferWidth
+      resolution[1] = gl.drawingBufferHeight
+    }
 
-        const program = new Program(gl, {
-            vertex: vertex,
-            fragment: fragment,
-            uniforms: {
-                iTime: { value: 0 },
-                iResolution: { value: new Float32Array([1, 1]) },
-                uCustomColor: { value: new Float32Array(customColorRgb) },
-                uUseCustomColor: { value: useCustomColor },
-                uSpeed: { value: speed * 0.4 },
-                uDirection: { value: directionMultiplier },
-                uScale: { value: scale },
-                uOpacity: { value: opacity },
-                uMouse: { value: new Float32Array([0, 0]) },
-                uMouseInteractive: { value: mouseInteractive ? 1.0 : 0.0 }
-            }
-        });
+    const handleMouseMove = (event: MouseEvent) => {
+      const rect = container.getBoundingClientRect()
+      const mouse = program.uniforms.uMouse.value as Float32Array
+      mouse[0] = (event.clientX - rect.left) * renderer.dpr
+      mouse[1] = (rect.height - (event.clientY - rect.top)) * renderer.dpr
+    }
 
-        const mesh = new Mesh(gl, { geometry, program });
+    let frame = 0
+    let isIntersecting = true
+    let lastFrameTime = 0
+    const startTime = performance.now()
+    const frameInterval = 1000 / 30
 
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!mouseInteractive) return;
-            const rect = containerRef.current!.getBoundingClientRect();
-            mousePos.current.x = e.clientX - rect.left;
-            mousePos.current.y = e.clientY - rect.top;
-            const mouseUniform = program.uniforms.uMouse.value as Float32Array;
-            mouseUniform[0] = mousePos.current.x;
-            mouseUniform[1] = mousePos.current.y;
-        };
+    const canAnimate = () => isIntersecting && !document.hidden
+    const loop = (time: number) => {
+      frame = 0
+      if (!canAnimate()) return
 
-        if (mouseInteractive) {
-            containerRef.current.addEventListener('mousemove', handleMouseMove);
+      if (time - lastFrameTime >= frameInterval) {
+        const elapsed = (time - startTime) * 0.001
+        if (direction === "pingpong") {
+          const duration = 10
+          const segment = elapsed % duration
+          const forward = Math.floor(elapsed / duration) % 2 === 0
+          const progress = segment / duration
+          const smooth = progress * progress * (3 - 2 * progress)
+          program.uniforms.uDirection.value = 1
+          program.uniforms.iTime.value = forward ? smooth * duration : (1 - smooth) * duration
+        } else {
+          program.uniforms.iTime.value = elapsed
         }
+        renderer.render({ scene: mesh })
+        lastFrameTime = time
+      }
+      frame = requestAnimationFrame(loop)
+    }
 
-        const setSize = () => {
-            const rect = containerRef.current!.getBoundingClientRect();
-            const width = Math.max(1, Math.floor(rect.width));
-            const height = Math.max(1, Math.floor(rect.height));
-            renderer.setSize(width, height);
-            const res = program.uniforms.iResolution.value as Float32Array;
-            res[0] = gl.drawingBufferWidth;
-            res[1] = gl.drawingBufferHeight;
-        };
+    const syncAnimation = () => {
+      if (canAnimate() && frame === 0) frame = requestAnimationFrame(loop)
+      if (!canAnimate() && frame !== 0) {
+        cancelAnimationFrame(frame)
+        frame = 0
+      }
+    }
 
-        const ro = new ResizeObserver(setSize);
-        ro.observe(containerRef.current);
-        setSize();
+    const resizeObserver = new ResizeObserver(setSize)
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry?.isIntersecting ?? false
+      syncAnimation()
+    })
 
-        let raf = 0;
-        const t0 = performance.now();
-        const loop = (t: number) => {
-            let timeValue = (t - t0) * 0.001;
-            if (direction === 'pingpong') {
-                const pingpongDuration = 10;
-                const segmentTime = timeValue % pingpongDuration;
-                const isForward = Math.floor(timeValue / pingpongDuration) % 2 === 0;
-                const u = segmentTime / pingpongDuration;
-                const smooth = u * u * (3 - 2 * u);
-                const pingpongTime = isForward ? smooth * pingpongDuration : (1 - smooth) * pingpongDuration;
-                (program.uniforms.uDirection as any).value = 1.0;
-                (program.uniforms.iTime as any).value = pingpongTime;
-            } else {
-                (program.uniforms.iTime as any).value = timeValue;
-            }
-            renderer.render({ scene: mesh });
-            raf = requestAnimationFrame(loop);
-        };
-        raf = requestAnimationFrame(loop);
+    resizeObserver.observe(container)
+    intersectionObserver.observe(container)
+    document.addEventListener("visibilitychange", syncAnimation)
+    if (mouseInteractive) container.addEventListener("mousemove", handleMouseMove, { passive: true })
+    setSize()
+    syncAnimation()
 
-        return () => {
-            cancelAnimationFrame(raf);
-            ro.disconnect();
-            if (mouseInteractive && containerRef.current) {
-                containerRef.current.removeEventListener('mousemove', handleMouseMove);
-            }
-            try {
-                containerRef.current?.removeChild(canvas);
-            } catch { }
-        };
-    }, [color, speed, direction, scale, opacity, mouseInteractive]);
+    return () => {
+      if (frame !== 0) cancelAnimationFrame(frame)
+      resizeObserver.disconnect()
+      intersectionObserver.disconnect()
+      document.removeEventListener("visibilitychange", syncAnimation)
+      if (mouseInteractive) container.removeEventListener("mousemove", handleMouseMove)
+      if (canvas.parentNode === container) container.removeChild(canvas)
+      gl.getExtension("WEBGL_lose_context")?.loseContext()
+    }
+  }, [color, direction, mouseInteractive, opacity, reduceMotion, scale, speed])
 
-    return <div ref={containerRef} className="w-full h-full relative overflow-hidden" />;
-};
-
-export default Plasma;
+  return (
+    <div
+      ref={containerRef}
+      className={`relative h-full w-full overflow-hidden ${reduceMotion ? "plasma-fallback" : ""}`}
+    />
+  )
+}

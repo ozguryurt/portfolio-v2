@@ -1,41 +1,32 @@
 import SkillBox from "../components/SkillCard"
+import SkillIcon from "../components/SkillIcon"
 import dataStore from "../stores/dataStore"
-import { Icon } from '@iconify/react';
-import { motion } from "framer-motion"
 import languageStore from "../stores/languageStore";
 import { ui, type Lang } from "../utils/translations";
 
 const Skills = () => {
-  const { apiData } = dataStore()
-  const { lang } = languageStore()
+  const apiData = dataStore((state) => state.apiData)
+  const lang = languageStore((state) => state.lang)
   const currentLang: Lang = lang
   const t = ui[currentLang]
 
   return (
     <section id="yetenekler" className="min-h-screen flex flex-col items-center justify-center lg:px-56 px-10 relative overflow-hidden dark:bg-zinc-900 bg-white">
 
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.25 }}
-        viewport={{ once: true, amount: 0.3 }}
-        className="font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5"
-      >
+      <p className="reveal-up font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5 [animation-delay:250ms]">
         {t.skills.title}
-      </motion.p>
+      </p>
 
       <div className="max-w-4xl flex flex-wrap justify-center items-center gap-5">
         {
           apiData?.yetenekler.map((yetenek, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: (i + 0.25) * 0.1 }}
-              viewport={{ once: true, amount: 0.2 }}
+            <div
+              key={yetenek.icon}
+              className="reveal-up"
+              style={{ animationDelay: `${(i + 0.25) * 100}ms` }}
             >
-              <SkillBox icon={<Icon icon={yetenek.icon} />} />
-            </motion.div>
+              <SkillBox icon={<SkillIcon name={yetenek.icon} label={yetenek.isim} />} />
+            </div>
           ))
         }
       </div>

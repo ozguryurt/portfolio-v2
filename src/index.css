@@ -1,65 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Tema değişikliği animasyonları */
-* {
-  transition: background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
 body {
-  font-family: "Syne", sans-serif !important;
+  font-family: "Syne", ui-sans-serif, system-ui, sans-serif;
 }
 
-.animate-float {
-  animation: float 4s ease-in-out infinite;
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
 }
 
-@keyframes float {
+.navbar-enter {
+  animation: navbar-enter 500ms ease 250ms both;
+}
 
-  0%,
-  100% {
+.reveal-up,
+.reveal-blur {
+  animation: reveal-up 400ms ease both;
+}
+
+.reveal-blur {
+  animation-name: reveal-blur;
+  animation-duration: 500ms;
+}
+
+.plasma-fallback {
+  background:
+    radial-gradient(circle at 25% 30%, rgb(221 241 255 / 85%), transparent 42%),
+    radial-gradient(circle at 75% 65%, rgb(186 230 253 / 55%), transparent 48%);
+}
+
+@keyframes navbar-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
+}
 
-  50% {
-    transform: translateY(-60px);
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.skillbox {
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes reveal-blur {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
 }
 
-.skillbox div:nth-child(1) {
-  transition: all 0.3s ease;
-}
+@media (prefers-reduced-motion: reduce) {
+  .theme-transitioning *,
+  .theme-transitioning *::before,
+  .theme-transitioning *::after {
+    transition: none !important;
+  }
 
-.skillbox div:nth-child(2) {
-  transition: all 0.3s ease;
-  opacity: 0;
-  position: absolute;
-  bottom: -20%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  .navbar-enter {
+    animation: none;
+  }
 
-.skillbox:hover div:nth-child(1) {
-  transform: translateY(-1rem);
-}
-
-.skillbox:hover div:nth-child(2) {
-  opacity: 1;
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  .reveal-up,
+  .reveal-blur {
+    animation: none;
+  }
 }

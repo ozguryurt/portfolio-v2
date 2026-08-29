@@ -1,26 +1,36 @@
-import { Icon } from "@iconify/react/dist/iconify.js"
-import { Link } from "react-router"
+import { MdMail } from "react-icons/md"
+import { SiGithub, SiLinkedin } from "react-icons/si"
 
-const ContactCard = ({url, baslik, deger, icon}: {url: string, baslik: string, deger: string, icon: string}) => {
-    return (
-        <>
-            <Link to={url} target="_blank">
-                <div className="flex justify-start items-center dark:bg-zinc-800 bg-zinc-200 rounded-2xl p-2 px-5 gap-2 w-full">
-                    <div className='text-6xl text-zinc-800 dark:text-white'>
-                        <Icon icon={icon} />
-                    </div>
-                    <div className='flex flex-col justify-center items-start'>
-                        <div className='text-lg text-zinc-800 dark:text-white font-bold'>
-                            {baslik}
-                        </div>
-                        <div className='text-sm text-zinc-800 dark:text-white'>
-                            {deger}
-                        </div>
-                    </div>
-                </div>
-            </Link>
-        </>
-    )
+const iconMap = {
+  "mdi:github": SiGithub,
+  "mdi:linkedin": SiLinkedin,
+  "mdi:mail": MdMail,
 }
 
-export default ContactCard
+type ContactIcon = keyof typeof iconMap
+
+export default function ContactCard({
+  url,
+  baslik,
+  deger,
+  icon,
+}: {
+  url: string
+  baslik: string
+  deger: string
+  icon: string
+}) {
+  const Icon = iconMap[icon as ContactIcon] ?? MdMail
+
+  return (
+    <a href={url} target={url.startsWith("mailto:") ? undefined : "_blank"} rel="noopener noreferrer">
+      <div className="flex w-full items-center justify-start gap-2 rounded-2xl bg-zinc-200 p-2 px-5 dark:bg-zinc-800">
+        <Icon aria-hidden="true" className="text-6xl text-zinc-800 dark:text-white" />
+        <div className="flex flex-col items-start justify-center">
+          <div className="text-lg font-bold text-zinc-800 dark:text-white">{baslik}</div>
+          <div className="text-sm text-zinc-800 dark:text-white">{deger}</div>
+        </div>
+      </div>
+    </a>
+  )
+}

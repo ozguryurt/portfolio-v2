@@ -1,12 +1,16 @@
 import { useEffect } from "react"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion } from "motion/react"
 import sheetStore from "../stores/sheetStore"
 import { IoClose } from "react-icons/io5"
 import { Link } from "react-router"
 
 const Sheet = () => {
 
-    const { isOpen, setIsOpen, title, body, url } = sheetStore()
+    const isOpen = sheetStore((state) => state.isOpen)
+    const setIsOpen = sheetStore((state) => state.setIsOpen)
+    const title = sheetStore((state) => state.title)
+    const body = sheetStore((state) => state.body)
+    const url = sheetStore((state) => state.url)
 
     useEffect(() => {
         if (!isOpen) return
