@@ -77,7 +77,7 @@ export default function MainLayout() {
   }, [effectiveLang, setApiData, setError, setLoading])
 
   return error ? (
-    <div className="flex h-screen items-center justify-center">
+    <div className="flex min-h-[100svh] items-center justify-center px-5 text-center">
       <p className="text-red-500">{error}</p>
     </div>
   ) : (
@@ -87,7 +87,7 @@ export default function MainLayout() {
       <LanguageSelector />
       <DeferredSheet />
       {loading && !apiData ? (
-        <div className="flex h-screen items-center justify-center">
+        <div className="flex min-h-[100svh] items-center justify-center">
           <div className="h-16 w-16 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-800 dark:border-zinc-700 dark:border-t-white" />
         </div>
       ) : (

@@ -11,13 +11,13 @@ const Skills = () => {
   const t = ui[currentLang]
 
   return (
-    <section id="yetenekler" className="min-h-screen flex flex-col items-center justify-center lg:px-56 px-10 relative overflow-hidden dark:bg-zinc-900 bg-white">
+    <section id="yetenekler" className="relative flex min-h-[100svh] flex-col items-center justify-start overflow-x-clip bg-white px-5 pb-28 pt-28 sm:justify-center sm:px-10 sm:pb-24 lg:px-56 dark:bg-zinc-900">
 
-      <p className="reveal-up font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5 [animation-delay:250ms]">
+      <p className="reveal-up mb-6 text-center text-4xl font-bold text-zinc-800 [animation-delay:250ms] sm:text-5xl lg:text-6xl xl:text-7xl dark:text-white">
         {t.skills.title}
       </p>
 
-      <div className="max-w-4xl flex flex-wrap justify-center items-center gap-5">
+      <div className="grid w-full max-w-sm grid-cols-4 gap-3 sm:flex sm:max-w-4xl sm:flex-wrap sm:items-center sm:justify-center sm:gap-5">
         {
           apiData?.yetenekler.map((yetenek, i) => (
             <div
@@ -25,7 +25,7 @@ const Skills = () => {
               className="reveal-up"
               style={{ animationDelay: `${(i + 0.25) * 100}ms` }}
             >
-              <SkillBox icon={<SkillIcon name={yetenek.icon} label={yetenek.isim} />} />
+              <SkillBox label={yetenek.isim} icon={<SkillIcon name={yetenek.icon} label={yetenek.isim} />} />
             </div>
           ))
         }

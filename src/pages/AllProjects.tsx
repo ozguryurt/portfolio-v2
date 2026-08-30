@@ -12,18 +12,18 @@ const AllProjects = () => {
 
   return (
     <>
-      <section id="projects" className="min-h-screen flex flex-col items-center justify-center lg:px-56 px-10 relative overflow-hidden dark:bg-zinc-900 bg-white py-32">
+      <section id="projects" className="relative flex min-h-[100svh] flex-col items-center justify-start overflow-x-clip bg-white px-4 pb-28 pt-28 sm:px-10 sm:py-32 lg:px-20 xl:px-56 dark:bg-zinc-900">
 
-        <p className="reveal-up font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5 [animation-delay:250ms]">
+        <p className="reveal-up mb-6 text-center text-4xl font-bold text-zinc-800 [animation-delay:250ms] sm:text-5xl lg:text-6xl xl:text-7xl dark:text-white">
           {t.projects.allProjects}
         </p>
 
-        <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid w-full grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
           {
             apiData?.projeler.map((proje, i) => (
               <div
                 key={`${proje.ad}-${proje.resimler[0]}`}
-                className="reveal-up"
+                className="content-auto reveal-up"
                 style={{ animationDelay: `${(i + 0.25) * 100}ms` }}
               >
                 <ProjectCard ad={proje.ad} resimler={proje.resimler} url={proje.url} priority={i < 2} />

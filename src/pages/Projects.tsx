@@ -12,13 +12,13 @@ const Projects = () => {
   const routes = routeMap[currentLang]
 
   return (
-    <section id="projeler" className="min-h-screen flex flex-col items-center justify-center lg:px-56 px-10 relative overflow-hidden dark:bg-zinc-900 bg-white">
+    <section id="projeler" className="relative flex min-h-[100svh] flex-col items-center justify-start overflow-x-clip bg-white px-4 pb-28 pt-28 sm:justify-center sm:px-10 sm:pb-24 lg:px-20 xl:px-56 dark:bg-zinc-900">
 
-      <p className="reveal-up font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5 [animation-delay:250ms]">
+      <p className="reveal-up mb-6 text-center text-4xl font-bold text-zinc-800 [animation-delay:250ms] sm:text-5xl lg:text-6xl xl:text-7xl dark:text-white">
         {t.projects.title}
       </p>
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-4 gap-5">
+      <div className="grid w-full grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
         {
           apiData?.projeler.slice(0, 4).map((proje, i) => (
             <div
@@ -30,8 +30,8 @@ const Projects = () => {
             </div>
           ))
         }
-        <div className="reveal-up mx-auto col-span-1 lg:col-span-4 [animation-delay:250ms]">
-          <Link to={`/${currentLang}${routes.allProjects}`} className="dark:bg-zinc-800 bg-zinc-200 dark:text-white text-zinc-800 px-8 py-2 rounded-full">
+        <div className="reveal-up col-span-2 mx-auto mt-2 lg:col-span-4 [animation-delay:250ms]">
+          <Link to={`/${currentLang}${routes.allProjects}`} className="inline-flex min-h-11 items-center rounded-full bg-zinc-200 px-7 py-2 text-sm font-semibold text-zinc-800 dark:bg-zinc-800 dark:text-white">
             {t.navbar.allProjects}
           </Link>
         </div>

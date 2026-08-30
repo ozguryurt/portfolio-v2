@@ -24,11 +24,11 @@ export default function ContactCard({
 
   return (
     <a href={url} target={url.startsWith("mailto:") ? undefined : "_blank"} rel="noopener noreferrer">
-      <div className="flex w-full items-center justify-start gap-2 rounded-2xl bg-zinc-200 p-2 px-5 dark:bg-zinc-800">
-        <Icon aria-hidden="true" className="text-6xl text-zinc-800 dark:text-white" />
-        <div className="flex flex-col items-start justify-center">
-          <div className="text-lg font-bold text-zinc-800 dark:text-white">{baslik}</div>
-          <div className="text-sm text-zinc-800 dark:text-white">{deger}</div>
+      <div className="flex min-h-20 w-full items-center justify-start gap-3 rounded-2xl bg-zinc-200 px-4 py-3 shadow-sm transition-transform active:scale-[0.99] sm:px-5 dark:bg-zinc-800">
+        <Icon aria-hidden="true" className="shrink-0 text-4xl text-zinc-800 sm:text-5xl lg:text-6xl dark:text-white" />
+        <div className="min-w-0 flex flex-col items-start justify-center">
+          <div className="text-base font-bold text-zinc-800 sm:text-lg dark:text-white">{baslik}</div>
+          <div className="max-w-full truncate text-sm text-zinc-700 dark:text-zinc-200">{deger}</div>
         </div>
       </div>
     </a>

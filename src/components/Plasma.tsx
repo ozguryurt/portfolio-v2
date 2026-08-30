@@ -20,6 +20,18 @@ const hexToRgb = (hex: string): [number, number, number] => {
   ]
 }
 
+function shouldUseStaticEffect() {
+  const nav = navigator as Navigator & {
+    deviceMemory?: number
+    connection?: { saveData?: boolean }
+  }
+  return (
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    nav.connection?.saveData === true ||
+    (nav.deviceMemory !== undefined && nav.deviceMemory <= 2)
+  )
+}
+
 const vertex = `#version 300 es
 precision highp float;
 in vec2 position;
@@ -95,23 +107,21 @@ export default function Plasma({
   mouseInteractive = true,
 }: PlasmaProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
-  const [reduceMotion, setReduceMotion] = useState(
-    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  )
+  const [useStaticEffect, setUseStaticEffect] = useState(shouldUseStaticEffect)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const updatePreference = () => setReduceMotion(mediaQuery.matches)
+    const updatePreference = () => setUseStaticEffect(shouldUseStaticEffect())
     mediaQuery.addEventListener("change", updatePreference)
     return () => mediaQuery.removeEventListener("change", updatePreference)
   }, [])
 
   useEffect(() => {
     const container = containerRef.current
-    if (!container || reduceMotion) return
+    if (!container || useStaticEffect) return
 
     const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8
-    const qualityScale = window.innerWidth < 768 || deviceMemory <= 4 ? 0.55 : 0.75
+    const qualityScale = window.innerWidth < 768 || deviceMemory <= 4 ? 0.45 : 0.75
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
@@ -219,12 +229,12 @@ export default function Plasma({
       if (canvas.parentNode === container) container.removeChild(canvas)
       gl.getExtension("WEBGL_lose_context")?.loseContext()
     }
-  }, [color, direction, mouseInteractive, opacity, reduceMotion, scale, speed])
+  }, [color, direction, mouseInteractive, opacity, scale, speed, useStaticEffect])
 
   return (
     <div
       ref={containerRef}
-      className={`relative h-full w-full overflow-hidden ${reduceMotion ? "plasma-fallback" : ""}`}
+      className={`relative h-full w-full overflow-hidden ${useStaticEffect ? "plasma-fallback" : ""}`}
     />
   )
 }

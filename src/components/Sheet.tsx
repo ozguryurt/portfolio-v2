@@ -40,7 +40,7 @@ const Sheet = () => {
                     transition={{ duration: 0.2 }}
                 >
                     <div
-                        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                        className="absolute inset-0 bg-black/50 sm:bg-black/40 sm:backdrop-blur-sm"
                         onClick={() => setIsOpen(false)}
                     />
 
@@ -61,28 +61,28 @@ const Sheet = () => {
                         }}
                     >
                         <div
-                            className="mx-2 sm:mx-4 md:mx-6 lg:mx-10 w-auto dark:bg-zinc-900 bg-white rounded-t-2xl shadow-2xl border-t border-zinc-200 dark:border-zinc-800 h-[80vh] flex flex-col"
+                            className="mx-0 flex h-[92svh] w-auto flex-col rounded-t-3xl border-t border-zinc-200 bg-white shadow-2xl sm:mx-4 sm:h-[80vh] sm:rounded-t-2xl md:mx-6 lg:mx-10 dark:border-zinc-800 dark:bg-zinc-900"
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className="relative px-6 pt-4 pb-3 flex-none">
+                            <div className="relative flex-none px-4 pb-3 pt-3 sm:px-6 sm:pt-4">
                                 <div className="mx-auto h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-700" />
                                 <button
                                     aria-label="Kapat"
                                     onClick={() => setIsOpen(false)}
-                                    className="absolute right-4 top-4 inline-flex items-center justify-center h-8 w-8 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-500/40 cursor-pointer"
+                                    className="absolute right-3 top-2 inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500/40 sm:right-4 sm:top-4 sm:h-8 sm:w-8 dark:hover:bg-zinc-800"
                                 >
                                     <IoClose size={20} className="dark:text-white text-zinc-800" />
                                 </button>
                             </div>
 
-                            <div className="px-6 pb-6 flex-1 overflow-y-auto">
-                                <div className="flex justify-start items-center gap-3">
-                                    <p className="text-lg font-semibold dark:text-white text-zinc-800">
+                            <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-6 sm:pb-6">
+                                <div className="mb-3 flex min-w-0 flex-col items-start justify-center gap-1 pr-10 sm:flex-row sm:justify-start sm:gap-3 sm:pr-0">
+                                    <p className="text-base font-semibold text-zinc-800 sm:text-lg dark:text-white">
                                         {title}
                                     </p>
                                     {
                                         url !== "" && (
-                                            <Link to={url} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-500">
+                                            <Link to={url} target="_blank" rel="noopener noreferrer" className="max-w-full truncate text-xs text-blue-500 sm:text-sm">
                                                 {url.replace("https://", "").replace("http://", "")}
                                             </Link>
                                         )

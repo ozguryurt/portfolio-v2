@@ -39,7 +39,7 @@ export default function LanguageSelector() {
       type="button"
       aria-label={`${languageNames[otherLang]} diline geç`}
       onClick={() => switchLang(otherLang)}
-      className="fixed bottom-5 left-5 z-50 cursor-pointer rounded-full bg-zinc-200/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg backdrop-blur-sm transition-opacity hover:opacity-80 dark:bg-zinc-800/80 dark:text-white"
+      className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 z-50 min-h-11 min-w-11 cursor-pointer rounded-full border border-zinc-300 bg-zinc-100/95 px-3 py-2 text-sm font-semibold text-zinc-800 shadow-lg transition-opacity hover:opacity-80 sm:bottom-5 sm:left-5 sm:border-0 sm:bg-zinc-200/80 sm:px-4 sm:backdrop-blur-sm dark:border-zinc-700 dark:bg-zinc-900/95 dark:text-white sm:dark:bg-zinc-800/80"
     >
       {languageNames[otherLang]}
     </button>

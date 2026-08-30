@@ -11,7 +11,7 @@ const AllProjects = lazy(() => import("./pages/AllProjects"))
 
 function PageFallback() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-zinc-900">
+    <div className="flex min-h-[100svh] items-center justify-center bg-white dark:bg-zinc-900">
       <div className="h-12 w-12 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-800 dark:border-zinc-700 dark:border-t-white" />
     </div>
   )

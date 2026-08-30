@@ -10,17 +10,17 @@ const Contact = () => {
   const t = ui[currentLang]
 
   return (
-    <section id="iletisim" className="min-h-screen flex flex-col items-center justify-center lg:px-56 px-10 relative overflow-hidden dark:bg-zinc-900 bg-white">
+    <section id="iletisim" className="relative flex min-h-[100svh] flex-col items-center justify-start overflow-x-clip bg-white px-5 pb-28 pt-28 sm:justify-center sm:px-10 sm:pb-24 lg:px-20 xl:px-56 dark:bg-zinc-900">
 
-      <p className="reveal-up font-bold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-center dark:text-white text-zinc-800 mb-5 [animation-delay:250ms]">
+      <p className="reveal-up mb-4 text-center text-4xl font-bold text-zinc-800 [animation-delay:250ms] sm:text-5xl lg:text-6xl xl:text-7xl dark:text-white">
         {t.contact.title}
       </p>
 
-      <p className="reveal-up font-normal text-xl text-center mb-12 drop-shadow-md dark:text-white text-zinc-800 [animation-delay:250ms]">
+      <p className="reveal-up mb-8 max-w-3xl text-center text-base font-normal leading-relaxed text-zinc-700 drop-shadow-md [animation-delay:250ms] sm:mb-12 sm:text-xl dark:text-zinc-100">
         {apiData?.iletisim.baslik}
       </p>
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid w-full max-w-md grid-cols-1 gap-3 sm:gap-5 lg:max-w-none lg:grid-cols-3">
         {apiData?.iletisim.bilgiler.map((iletisim, i) => (
           <div
             key={iletisim.url}

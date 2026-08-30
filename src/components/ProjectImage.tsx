@@ -25,7 +25,7 @@ export default function ProjectImage({
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
-          className={`aspect-video min-h-32 w-full rounded ${type === "cover" ? "object-cover" : "object-contain"} ${loading ? "invisible absolute" : "block"}`}
+          className={`aspect-video w-full rounded-lg ${type === "cover" ? "object-cover" : "object-contain"} ${loading ? "invisible absolute" : "block"}`}
           onLoad={() => setLoading(false)}
           onError={() => {
             setLoading(false)
@@ -33,9 +33,9 @@ export default function ProjectImage({
           }}
         />
       )}
-      {loading && <div className="aspect-video min-h-32 w-full animate-pulse rounded bg-slate-700" />}
+      {loading && <div className="aspect-video w-full animate-pulse rounded-lg bg-slate-700" />}
       {failed && (
-        <div className="flex aspect-video min-h-32 w-full items-center justify-center rounded bg-zinc-300 text-sm text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+        <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-zinc-300 px-2 text-center text-xs text-zinc-600 sm:text-sm dark:bg-zinc-700 dark:text-zinc-300">
           Görsel yüklenemedi
         </div>
       )}
