@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function ProjectImage({
   src,
@@ -13,19 +13,15 @@ export default function ProjectImage({
   priority?: boolean
   size?: "thumbnail" | "full"
 }) {
-  const [loading, setLoading] = useState(true)
-  const [failed, setFailed] = useState(false)
   const optimizedSrc = src.replace(
     /\.(png|jpe?g)(?=([?#]|$))/i,
     size === "thumbnail" ? ".thumb.webp" : ".webp",
   )
-  const [imageSrc, setImageSrc] = useState(optimizedSrc)
-
-  useEffect(() => {
-    setImageSrc(optimizedSrc)
-    setLoading(true)
-    setFailed(false)
-  }, [optimizedSrc])
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null)
+  const [failedSrc, setFailedSrc] = useState<string | null>(null)
+  const imageSrc = failedSrc === optimizedSrc ? src : optimizedSrc
+  const failed = failedSrc === imageSrc
+  const loading = !failed && loadedSrc !== imageSrc
 
   return (
     <div className="relative flex h-full w-full items-center justify-center">
@@ -40,14 +36,12 @@ export default function ProjectImage({
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
           className={`aspect-video w-full rounded-lg ${type === "cover" ? "object-cover" : "object-contain"} ${loading ? "invisible absolute" : "block"}`}
-          onLoad={() => setLoading(false)}
+          onLoad={() => setLoadedSrc(imageSrc)}
           onError={() => {
-            setLoading(false)
             if (imageSrc !== src) {
-              setImageSrc(src)
-              setLoading(true)
+              setFailedSrc(optimizedSrc)
             } else {
-              setFailed(true)
+              setFailedSrc(imageSrc)
             }
           }}
         />
