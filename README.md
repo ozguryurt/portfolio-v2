@@ -1,78 +1,91 @@
-## Portfolio v2 (React + TypeScript + Vite)
+# Portfolio v2
 
-Kişisel portföy projesi. Modern, hızlı ve erişilebilir bir arayüzle; projeler, yetenekler ve iletişim bölümlerini barındırır. Tema seçimi, sayfa içi yumuşak geçişler ve mobil/masaüstü uyumlu alt sheet (bottom sheet) içerir.
+Türkçe ve İngilizce destekli, mobil uyumlu kişisel portföy sitesi. React, TypeScript ve Vite ile geliştirilmiştir.
 
-### Özellikler
-- **Hızlı ve modern**: React + Vite + TypeScript
-- **Stil**: Tailwind CSS v4
-- **Yönlendirme**: React Router ile hash tabanlı routing
-- **Durum yönetimi**: Zustand ile global state
-- **Animasyonlar**: Framer Motion ile giriş/çıkış ve sheet animasyonları
-- **Bulanık arka planlı Sheet**: Mobilde neredeyse tam ekran, masaüstünde 3/4 yükseklik; ESC, tıkla kapat, sürükle-kapat desteği
-- **Tema seçimi**: Açık/Koyu tema geçişi
-- **İçerik**: `public/config.json` üzerinden yapılandırılabilir içerik
+## Özellikler
 
-### Teknolojiler
-- React 19
-- TypeScript 5
-- Vite 7
+- Türkçe ve İngilizce arayüz ve içerik; dil URL'den belirlenir ve seçilen dil saklanır.
+- Ana sayfa, yetenekler, projeler, tüm projeler ve iletişim sayfaları.
+- Açık/koyu tema; tercih tarayıcıda saklanır.
+- Mobil ve masaüstü için uyarlanabilir gezinme, kartlar ve proje ayrıntı paneli.
+- Proje kartlarında tembel yüklenen WebP küçük görseller; ayrıntı panelinde tam boy WebP. WebP bulunamazsa bileşen özgün görsel biçimine geri döner.
+- Ana sayfada Plasma arka plan efekti; mobilde, düşük hareket tercihi olanlarda ve veri tasarrufu açıkken statik görünüm.
+- Sayfa ve ayrıntı paneli bileşenleri ihtiyaç duyuldukça yüklenir.
+
+## Teknolojiler
+
+- React 19, TypeScript ve Vite 8
 - Tailwind CSS 4
-- React Router 7
+- React Router 8
 - Zustand 5
-- Framer Motion (animasyonlar)
+- Motion ve OGL
 - React Icons
 
-### Hızlı Başlangıç
-Gereksinimler: Node.js 22+
+## Gereksinimler
+
+Node.js `^20.19.0` veya `>=22.12.0` ve npm gerekir.
+
+## Geliştirme
 
 ```bash
 npm install
 npm run dev
 ```
 
-Derleme ve önizleme:
+Diğer komutlar:
 
 ```bash
-npm run build
-npm run preview
+npm run build    # TypeScript kontrolü ve üretim derlemesi
+npm run preview  # Üretim derlemesini yerelde önizleme
+npm run lint     # ESLint
 ```
 
-### Proje Yapısı
+Derleme çıktısı `dist/` klasörüne yazılır.
+
+## Sayfalar ve URL'ler
+
+| Sayfa | Türkçe | English |
+| --- | --- | --- |
+| Ana sayfa | `/tr` | `/en` |
+| Yetenekler / Skills | `/tr/yetenekler` | `/en/skills` |
+| Projeler / Projects | `/tr/projeler` | `/en/projects` |
+| Tüm projeler / All projects | `/tr/projeler/tumu` | `/en/projects/all` |
+| İletişim / Contact | `/tr/iletisim` | `/en/contact` |
+
+Kök URL (`/`), tarayıcıda kayıtlı veya tarayıcı dilinden algılanan dile yönlendirir. Uygulama sunucusunda bu URL'lerin SPA giriş sayfasına yönlendirilmesi etkin olmalıdır.
+
+## İçerik ve görseller
+
+İçerik `public/locales/tr.json` ve `public/locales/en.json` dosyalarından yüklenir. İki dosyanın veri yapısı `src/stores/dataStore.ts` içindeki `ApiData` tipiyle eşleşmelidir. Başlıca alanlar `anasayfa`, `hakkimda`, `projeler`, `yetenekler` ve `iletisim` şeklindedir.
+
+Proje görsellerinin yolları çeviri dosyalarındaki `projeler[].resimler` dizisinde tutulur. Proje görsellerini `public/images/projeler/` altına yerleştirin. Bu klasörün içeriği `.gitignore` ile Git dışında tutulur; bu nedenle GitHub'a veya başka bir dağıtım ortamına görseller otomatik olarak gönderilmez. Dağıtım sırasında görselleri ayrıca sunucuya/CDN'e yükleyin veya dağıtım girdisine dahil edin. Klasördeki `.gitkeep` yalnızca boş klasörün Git'te korunmasını sağlar.
+
+Proje kartları için her kaynak görselin `.thumb.webp` önizlemesi, ayrıntı paneli için `.webp` sürümü kullanılır. Dönüştürme aracı bu çalışma alanında `scripts/convert_images_to_webp.py` konumundadır ve FFmpeg'in `PATH` üzerinde bulunmasını gerektirir:
+
+```bash
+python scripts/convert_images_to_webp.py
+```
+
+Araç özgün görselleri silmez; var olan WebP çıktılarının üzerine yazmak için `--overwrite` verilebilir. Dönüştürme scripti `.gitignore` içinde olduğundan repoya dahil edilmez.
+
+## Proje yapısı
+
 ```text
-portfolio-v2/
-  public/
-    config.json            # İçerik yapılandırması
-    images/                # Görseller
-      projeler/            # Projelerin görselleri (eklenmeli)
-  src/
-    components/            # Bileşenler (Navbar, Sheet, vb.)
-    layouts/               # Layout dizaynları
-    pages/                 # Route bileşenleri
-    sections/              # Anasayfa bölümleri (Home, Projects, Skills, Contact)
-    stores/                # Zustand store'ları (tema, sheet, config data)
-    main.tsx               # Uygulama girişi
-    index.css              # Global stiller
+public/
+  favicon.ico
+  locales/                 # Türkçe ve İngilizce içerik JSON'ları
+  images/
+    projeler/               # Yerel proje görselleri (Git dışında)
+src/
+  components/               # Navbar, görsel, Sheet, Plasma ve ikon bileşenleri
+  layouts/                  # Ortak sayfa düzeni ve içerik yükleme
+  pages/                    # Ana sayfa ve içerik sayfaları
+  stores/                   # Zustand tema, dil, içerik ve Sheet durumları
+  utils/                    # Dil metinleri ve rota eşlemeleri
+  App.tsx                    # Dil tabanlı rotalar ve tembel sayfa yükleme
+  main.tsx                   # Uygulama girişi
 ```
 
-### İçerik ve Konfigürasyon
-- İçerikler `public/config.json` dosyasından yüklenir. Beklenen alanlar:
-  - `anasayfa` (başlıklar, yazı, görsel)
-  - `hakkimda` (sayımsal veriler)
-  - `projeler` (ad, url, resimler[])
-  - `yetenekler` (isim, icon)
-  - `iletisim` (başlık, bilgiler[])
-- Proje görsellerini `public/images/projeler/` altına ekleyin ve `config.json` içinde ilgili yollara referans verin.
-- Tüm iconlar için "iconify.design" paketini kullanın.
+## Dağıtım
 
-### Sheet Davranışı (Mobil/Masaüstü)
-- Mobil: Tam genişlik, kenarlarda küçük boşluk; yükseklik neredeyse tam ekran (üstte küçük boşluk) ve sürükleyerek kapatma desteği.
-- Masaüstü: Tam genişlik, kenarlarda boşluk; yükseklik ekranın 3/4'ü.
-- Arka plan bulanık ve tıklanabilir. ESC ile de kapanır.
-
-### Geliştirme Notları
-- Tailwind sınıfları ile temalandırma yapılır; `dark` modu sınıfı üzerinden etkinleştirilir.
-- Global durumlar `src/stores/` altında tutulur (`zustand`).
-- Bileşen animasyonlarında `framer-motion` kullanılır.
-
-### Dağıtım
-- `npm run build` sonrası oluşan `dist/` klasörünü statik olarak herhangi bir CDN/hosting (Vercel, Netlify, Cloudflare Pages, GitHub Pages vb.) üzerinde sunabilirsiniz.
+`npm run build` komutundan sonra `dist/` içeriğini bir statik barındırma servisine yükleyin. İstemci tarafı yönlendirme nedeniyle sunucu fallback ayarını etkinleştirin ve `public/images/projeler/` dosyalarını Git dışından ayrıca sağlayın.
