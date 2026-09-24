@@ -26,6 +26,3 @@ dist-ssr
 # Ignore project screenshots while keeping their directory in Git.
 public/images/projeler/*
 !public/images/projeler/.gitkeep
-
-# Keep the local image conversion helper out of version control
-scripts/convert_images_to_webp.py

@@ -66,7 +66,7 @@ Proje kartları için her kaynak görselin `.thumb.webp` önizlemesi, ayrıntı 
 python scripts/convert_images_to_webp.py
 ```
 
-Araç özgün görselleri silmez; var olan WebP çıktılarının üzerine yazmak için `--overwrite` verilebilir. Dönüştürme scripti `.gitignore` içinde olduğundan repoya dahil edilmez.
+Araç özgün görselleri silmez; var olan WebP çıktılarının üzerine yazmak için `--overwrite` verilebilir. Script repoya dahildir.
 
 ## Proje yapısı
 
