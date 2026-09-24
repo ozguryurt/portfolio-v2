@@ -34,7 +34,7 @@ export default function ProjectCard({
       onClick={handleProjectClick}
       className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-200 p-1.5 shadow-sm transition-transform active:scale-[0.98] sm:p-2 dark:bg-zinc-800"
     >
-      <ProjectImage src={resimler[0]} alt={`${ad} proje kapağı`} priority={priority} />
+      <ProjectImage src={resimler[0]} alt={`${ad} proje kapağı`} priority={priority} size="thumbnail" />
       <span className="line-clamp-2 min-h-8 px-1 text-center text-xs font-bold leading-4 text-zinc-800 sm:min-h-0 sm:text-sm dark:text-white">{ad}</span>
     </button>
   )

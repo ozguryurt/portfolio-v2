@@ -1,27 +1,41 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function ProjectImage({
   src,
   alt,
   type = "cover",
   priority = false,
+  size = "full",
 }: {
   src: string
   alt: string
   type?: "cover" | "contain"
   priority?: boolean
+  size?: "thumbnail" | "full"
 }) {
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
+  const optimizedSrc = src.replace(
+    /\.(png|jpe?g)(?=([?#]|$))/i,
+    size === "thumbnail" ? ".thumb.webp" : ".webp",
+  )
+  const [imageSrc, setImageSrc] = useState(optimizedSrc)
+
+  useEffect(() => {
+    setImageSrc(optimizedSrc)
+    setLoading(true)
+    setFailed(false)
+  }, [optimizedSrc])
 
   return (
     <div className="relative flex h-full w-full items-center justify-center">
       {!failed && (
         <img
-          src={src}
+          src={imageSrc}
           alt={alt}
-          width={640}
-          height={360}
+          width={size === "thumbnail" ? 640 : 1600}
+          height={size === "thumbnail" ? 360 : 900}
+          sizes={size === "thumbnail" ? "(max-width: 640px) 45vw, 320px" : "(max-width: 768px) 90vw, 720px"}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
@@ -29,7 +43,12 @@ export default function ProjectImage({
           onLoad={() => setLoading(false)}
           onError={() => {
             setLoading(false)
-            setFailed(true)
+            if (imageSrc !== src) {
+              setImageSrc(src)
+              setLoading(true)
+            } else {
+              setFailed(true)
+            }
           }}
         />
       )}

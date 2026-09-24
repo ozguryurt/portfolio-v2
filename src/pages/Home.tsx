@@ -9,7 +9,7 @@ const Home = () => {
         <>
             <section id="anasayfa" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-white px-5 pb-24 pt-28 sm:px-10 lg:px-56 dark:bg-zinc-900">
 
-                <div className="reveal-blur absolute inset-0 [animation-delay:250ms]">
+                <div aria-hidden="true" className="pointer-events-none absolute inset-0">
                     <Plasma
                         color="#ddf1ff"
                         speed={0.6}
@@ -18,7 +18,6 @@ const Home = () => {
                         opacity={0.8}
                         mouseInteractive={false}
                     />
-
                 </div>
 
                 <div className="relative z-10 mx-auto max-w-5xl">

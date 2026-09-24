@@ -1,9 +1,10 @@
 import { MdMail } from "react-icons/md"
-import { SiGithub, SiLinkedin } from "react-icons/si"
+import { FaLinkedin } from "react-icons/fa6"
+import { SiGithub } from "react-icons/si"
 
 const iconMap = {
   "mdi:github": SiGithub,
-  "mdi:linkedin": SiLinkedin,
+  "mdi:linkedin": FaLinkedin,
   "mdi:mail": MdMail,
 }
 

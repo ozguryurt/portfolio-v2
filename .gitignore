@@ -23,5 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ignore images folder
-public/images
+# Keep the images directory in Git, but ignore all of its contents.
+public/images/*
+!public/images/.gitkeep
+
+# Keep the local image conversion helper out of version control
+scripts/convert_images_to_webp.py

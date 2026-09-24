@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons"
 import {
   SiBootstrap,
-  SiCss3,
+  SiCss,
   SiExpress,
   SiFlutter,
   SiGraphql,
@@ -14,6 +14,7 @@ import {
   SiPostgresql,
   SiPython,
   SiReact,
+  SiSharp,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si"
@@ -25,7 +26,7 @@ type SkillIconDefinition = {
 
 const iconMap: Record<string, SkillIconDefinition> = {
   "skill-icons:html": { Icon: SiHtml5, color: "#e34f26" },
-  "skill-icons:css": { Icon: SiCss3, color: "#1572b6" },
+  "skill-icons:css": { Icon: SiCss, color: "#1572b6" },
   "skill-icons:javascript": { Icon: SiJavascript, color: "#f7df1e" },
   "skill-icons:typescript": { Icon: SiTypescript, color: "#3178c6" },
   "devicon:flutter": { Icon: SiFlutter, color: "#02569b" },
@@ -43,7 +44,9 @@ const iconMap: Record<string, SkillIconDefinition> = {
 }
 
 export default function SkillIcon({ name, label }: { name: string; label: string }) {
-  const definition = iconMap[name]
+  const normalizedLabel = label.trim().toLowerCase().replaceAll("#", "sharp")
+  const definition = iconMap[name] ??
+    (normalizedLabel === "csharp" ? { Icon: SiSharp, color: "#512bd4" } : undefined)
 
   if (!definition) {
     return <span aria-label={label} className="font-bold text-[#512bd4]">{label.slice(0, 2)}</span>

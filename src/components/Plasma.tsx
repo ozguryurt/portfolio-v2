@@ -20,6 +20,9 @@ const hexToRgb = (hex: string): [number, number, number] => {
   ]
 }
 
+const MOBILE_BREAKPOINT = 768
+const MAX_ANIMATION_SECONDS = 12
+
 function shouldUseStaticEffect() {
   const nav = navigator as Navigator & {
     deviceMemory?: number
@@ -27,6 +30,7 @@ function shouldUseStaticEffect() {
   }
   return (
     window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+    window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches ||
     nav.connection?.saveData === true ||
     (nav.deviceMemory !== undefined && nav.deviceMemory <= 2)
   )
@@ -110,10 +114,13 @@ export default function Plasma({
   const [useStaticEffect, setUseStaticEffect] = useState(shouldUseStaticEffect)
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mediaQueries = [
+      window.matchMedia("(prefers-reduced-motion: reduce)"),
+      window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`),
+    ]
     const updatePreference = () => setUseStaticEffect(shouldUseStaticEffect())
-    mediaQuery.addEventListener("change", updatePreference)
-    return () => mediaQuery.removeEventListener("change", updatePreference)
+    mediaQueries.forEach((query) => query.addEventListener("change", updatePreference))
+    return () => mediaQueries.forEach((query) => query.removeEventListener("change", updatePreference))
   }, [])
 
   useEffect(() => {
@@ -121,7 +128,7 @@ export default function Plasma({
     if (!container || useStaticEffect) return
 
     const deviceMemory = (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? 8
-    const qualityScale = window.innerWidth < 768 || deviceMemory <= 4 ? 0.45 : 0.75
+    const qualityScale = deviceMemory <= 4 ? 0.45 : 0.75
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
@@ -180,23 +187,25 @@ export default function Plasma({
       frame = 0
       if (!canAnimate()) return
 
-      if (time - lastFrameTime >= frameInterval) {
-        const elapsed = (time - startTime) * 0.001
+      const elapsed = (time - startTime) * 0.001
+      const animationFinished = elapsed >= MAX_ANIMATION_SECONDS
+      if (time - lastFrameTime >= frameInterval || animationFinished) {
+        const animationTime = Math.min(elapsed, MAX_ANIMATION_SECONDS)
         if (direction === "pingpong") {
           const duration = 10
-          const segment = elapsed % duration
-          const forward = Math.floor(elapsed / duration) % 2 === 0
+          const segment = animationTime % duration
+          const forward = Math.floor(animationTime / duration) % 2 === 0
           const progress = segment / duration
           const smooth = progress * progress * (3 - 2 * progress)
           program.uniforms.uDirection.value = 1
           program.uniforms.iTime.value = forward ? smooth * duration : (1 - smooth) * duration
         } else {
-          program.uniforms.iTime.value = elapsed
+          program.uniforms.iTime.value = animationTime
         }
         renderer.render({ scene: mesh })
         lastFrameTime = time
       }
-      frame = requestAnimationFrame(loop)
+      if (!animationFinished) frame = requestAnimationFrame(loop)
     }
 
     const syncAnimation = () => {
