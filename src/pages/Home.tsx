@@ -1,23 +1,46 @@
 import dataStore from "../stores/dataStore"
-import Plasma from "../components/Plasma"
+import GhostFibers from "../components/GhostFibers"
+import themeStore from "../stores/themeStore"
 
 const Home = () => {
 
     const apiData = dataStore((state) => state.apiData)
+    const theme = themeStore((state) => state.theme)
 
     return (
         <>
             <section id="anasayfa" className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden bg-white px-5 pb-24 pt-28 sm:px-10 lg:px-56 dark:bg-zinc-900">
 
                 <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-                    <Plasma
-                        color="#ddf1ff"
-                        speed={0.6}
-                        direction="forward"
-                        scale={1.1}
-                        opacity={0.8}
-                        mouseInteractive={false}
-                    />
+                  <GhostFibers
+                    lineColor="#3B82F6"
+                    glowColor="#3B82F6"
+                    speed={0.15}
+                    scale={2}
+                    rotation={60}
+                    rotationSpeed={0.1}
+                    layers={4}
+                    waveAmplitude={0.015}
+                    waveFrequency={3}
+                    waveSpeed={0.15}
+                    layerSpeed={0.08}
+                    twist={0.1}
+                    twistFrequency={5}
+                    twistSpeed={1}
+                    lineFrequency={6}
+                    lineSpacing={2}
+                    lineSharpness={16}
+                    glowFalloff={10}
+                    glowIntensity={1}
+                    brightness={0.25}
+                    blueBoost={1}
+                    vignette={0.9}
+                    grain={0}
+                    dpr={0.75}
+                    lightMode={theme === "light"}
+                    fps={30}
+                    paused={false}
+                  />
                 </div>
 
                 <div className="relative z-10 mx-auto max-w-5xl">
