@@ -32,7 +32,7 @@ const Home = () => {
                     lineSharpness={16}
                     glowFalloff={10}
                     glowIntensity={1}
-                    brightness={0.25}
+                    brightness={0.15}
                     blueBoost={1}
                     vignette={0.9}
                     grain={0}
